@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# this script will config the localhost and fb.com IP addresses in /etc/hosts
+
+# this will check if its running as root
+sudo cp /etc/hosts /etc/hosts.bak
+
+# this removes any localhost and fb entries
+sudo sed -i '/127.0.0.1\s*localhost/d' /etc/hosts
+sudo sed -i '/facebook.com/d' /etc/hosts
+
+# this will be adding new entries for fb
+echo "127.0.0.2 localhost" | sudo tee -a /etc/hosts > /dev/null
+echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts > /dev/null
+
+echo "Host resolution updated: localhost -> 127.0.0.2, facebook.com -> 8.8.8.8"
